@@ -77,6 +77,7 @@ export default function SellRoute() {
                             Submit Form
                         </Button>
                     </CardFooter>
+                    
                 </form>
             </Card>
         </section>
