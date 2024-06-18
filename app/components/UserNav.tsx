@@ -2,6 +2,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
+import Link from "next/link";
 
 
 //dynamically for showing user details if logged in
@@ -39,8 +40,10 @@ export function UserNav({ email, name, userImage } : iAppProps) {
                 <DropdownMenuSeparator />
 
                 <DropdownMenuGroup >
-                    <DropdownMenuItem className="cursor-pointer">
-                        Item 1
+                    <DropdownMenuItem className="cursor-pointer" asChild>
+                        <Link href="/sell">
+                            Sell your Product
+                        </Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem className="cursor-pointer">
                         Item 2
