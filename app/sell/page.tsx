@@ -1,9 +1,11 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { SelectCategory } from "../components/SelectCategory";
 import { Textarea } from "@/components/ui/textarea";
 import { TipTapEditor } from "../components/Editor";
+import { UploadDropzone } from "../lib/uploadthing";
+import { Button } from "@/components/ui/button";
 
 export default function SellRoute() {
     return(
@@ -52,7 +54,29 @@ export default function SellRoute() {
                             </Label>
                             <TipTapEditor />
                         </div>
+                        
+                        <div className="flex flex-col gap-y-2">
+                            <Label>
+                                Product Images
+                            </Label>
+                            <UploadDropzone endpoint="imageUploader" />
+                        </div>
+
+                        <div className="flex flex-col gap-y-2">
+                            <Label>
+                                Product File
+                            </Label>
+                            <UploadDropzone endpoint="productFileUpload" />
+                        </div>
+
+
                     </CardContent>
+
+                    <CardFooter className="mt-5">
+                        <Button>
+                            Submit Form
+                        </Button>
+                    </CardFooter>
                 </form>
             </Card>
         </section>
