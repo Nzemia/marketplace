@@ -37,6 +37,9 @@ export default function SellRoute() {
                                 Name
                             </Label>
                             <Input name="name" type="text" placeholder="Name of your product" />
+                            {state?.errors?.["name"] ?.[0] && (
+                                <p className="text-destructive">{state?.errors?.["name"] ?.[0]}</p>
+                            )}
                         </div>
 
                         <div className="flex flex-col gap-y-2">
@@ -44,6 +47,9 @@ export default function SellRoute() {
                                 Category
                             </Label>
                             <SelectCategory />
+                            {state?.errors?.["category"] ?.[0] && (
+                                <p className="text-destructive">{state?.errors?.["category"] ?.[0]}</p>
+                            )}
                         </div>
 
                         <div className="flex flex-col gap-y-2">
@@ -51,6 +57,9 @@ export default function SellRoute() {
                                 Price
                             </Label>
                             <Input name="price" type="number" placeholder="shs." />
+                            {state?.errors?.["price"] ?.[0] && (
+                                <p className="text-destructive">{state?.errors?.["price"] ?.[0]}</p>
+                            )}
                         </div>
 
                         
@@ -59,6 +68,9 @@ export default function SellRoute() {
                                 Small Summary
                             </Label>
                             <Textarea name="smallDescription" placeholder="Describe your product here..." />
+                            {state?.errors?.["smallDescription"] ?.[0] && (
+                                <p className="text-destructive">{state?.errors?.["smallDescription"] ?.[0]}</p>
+                            )}
                         </div>
 
                         {/**used tiptap.dev for the textarea, ie, bold, h1, h3, et al */}
@@ -68,6 +80,9 @@ export default function SellRoute() {
                                 Description
                             </Label>
                             <TipTapEditor json={json} setJson={setJson} />
+                            {state?.errors?.["description"] ?.[0] && (
+                                <p className="text-destructive">{state?.errors?.["description"] ?.[0]}</p>
+                            )}
                         </div>
                         
                         <div className="flex flex-col gap-y-2">
@@ -84,23 +99,29 @@ export default function SellRoute() {
                                     throw new Error(`${error}`)
                                 }}
                             />
+                            {state?.errors?.["images"]?.[0] && (
+                                <p className="text-destructive">{state?.errors?.["images"]?.[0]}</p>
+                            )}
                         </div>
 
                         <div className="flex flex-col gap-y-2">
-                            <input name="productFile" type="hidden" value={productFile ?? ""} />
+                            <input type="hidden" name="productFile"  value={productFile ?? ""} />
 
                             <Label>
                                 Product File
                             </Label>
-                            <UploadDropzone 
-                                endpoint="productFileUpload" 
+                            <UploadDropzone                                
                                 onClientUploadComplete={(res) => {
                                 setProductFile(res[0].url);
                             }}
+                                endpoint="productFileUpload" 
                                 onUploadError={(error: Error) => {
                                     throw new Error(`${error}`)
                                 }}                            
                             />
+                            {state?.errors?.["productFile"]?.[0] && (
+                                <p className="text-destructive">{state?.errors?.["productFile"]?.[0]}</p>
+                            )}
                         </div>
 
 

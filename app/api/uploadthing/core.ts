@@ -27,7 +27,8 @@ export const ourFileRouter = {
     }),
 
 
-    productFileUpload: f({ "application/zip": { maxFileCount: 1 }})
+    //here, application/zip didnt work for me, so decided to use blob
+    productFileUpload: f({ "blob": { maxFileCount: 1 }})
         
         .middleware(async ({ req }) => {
             const { getUser } = getKindeServerSession();

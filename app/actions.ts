@@ -17,7 +17,7 @@ const productSchema = z.object({
     category: z.string().min(1, { message: "Category is required! "}),
     price: z.number().min(1, { message: "Price cannot be 0 or less than 0! "}),
     smallDescription: z.string().min(10, { message: "Please summarize your product more! "}),
-    description: z.string().min(1, { message: "Description is required! "}),
+    description: z.string().min(10, { message: "Description is required! "}),
     images: z.array(z.string(), { message: "Images are required! "}),
     productFile: z.string().min(1, { message: "Please upload zip of your product! "}),
 });
@@ -33,11 +33,11 @@ export async function SellProduct(prevState: any, formData: FormData) {
     const validateFields = productSchema.safeParse({
         name: formData.get("name"),
         category: formData.get("category"),
-        price: formData.get("price"),
+        price: Number(formData.get("price")),
         smallDescription: formData.get("smallDescription"),
         description: formData.get("description"),
-        images: formData.get("images"),
-        productFile: formData.get("productFile"),
+        images: JSON.parse(formData.get("images") as string),
+        productFile: formData.get("productFile")
     });
 
     if(!validateFields.success) {
