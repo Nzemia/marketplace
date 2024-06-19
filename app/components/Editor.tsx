@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { EditorContent, useEditor, type Editor } from "@tiptap/react";
+import { EditorContent, JSONContent, useEditor, type Editor } from "@tiptap/react";
 import { StarterKit } from "@tiptap/starter-kit";
 
 {/**used tiptap.dev for the textarea, ie, bold, h1, h3, et al */}
@@ -69,15 +69,18 @@ export const MenuBar = ({ editor } : { editor : Editor | null}) => {
 //for the h1, h2 to effect while typing instantly, installed npm install -D @tailwindcss/typography
 // then in tailwind added require('@tailwindcss/typography'),
 //then added the prose
-export function TipTapEditor() {
+export function TipTapEditor({ setJson, json } : { setJson: any, json: JSONContent | null }) {
     const editor = useEditor({
         extensions: [StarterKit],
-        content: "<p>Write here...</p>",
+        content: json ?? "<p>Write here...</p>",
         editorProps: {
             attributes: {
                 class: "focus:outline-none min-h-[150px] prose prose-sm sm:prose-base",
             }
-        }
+        },
+        onUpdate: ({ editor }) => {
+            setJson(editor.getJSON());
+        },
     });
 
     return(
