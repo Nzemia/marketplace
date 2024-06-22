@@ -48,7 +48,7 @@ export function ProductCard({ images, id, price, smallDescription, name,  } : iA
             <p className="text-gray-600 line-clamp-2 text-sm mt-2">{smallDescription}</p>
 
             <Button asChild className="w-full mt-5">
-                <Link href={`/products/${id}`}>
+                <Link href={`/product/${id}`}>
                     Learn More!                
                 </Link>
 
