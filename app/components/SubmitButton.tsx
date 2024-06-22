@@ -5,7 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
 import { useFormStatus } from "react-dom";
 
-export function SubmitButton() {
+//distr the title to make it dynamic
+export function SubmitButton({ title }: { title: string }) {
     const { pending } = useFormStatus();
 
     return(
@@ -19,7 +20,7 @@ export function SubmitButton() {
             ) : (
 
                 <Button type="submit">
-                    Create your Product
+                    {title}
                 </Button>
             )}
         </>

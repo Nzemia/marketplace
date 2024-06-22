@@ -12,8 +12,8 @@ export type State = {
     };
     message ? : string | null;
 }
-//used zod, npm i zod
 
+//used zod, npm i zod
 const productSchema = z.object({
     name: z.string().min(3, { message: "The minimum character can only be 5!" }),
     category: z.string().min(1, { message: "Category is required! "}),
@@ -23,6 +23,12 @@ const productSchema = z.object({
     images: z.array(z.string(), { message: "Images are required! "}),
     productFile: z.string().min(1, { message: "Please upload zip of your product! "}),
 });
+
+//since updating aint a must for each field, we make them optional by z.literal("").optional()
+const userSettingsSchema = z.object({
+    firstName: z.string().min(3, { message: "Minimum character length of 3 is required!"}).or(z.literal("")).optional(),
+    lastName: z.string().min(3, { message: "Minimum character length of 3 is required!"}).or(z.literal("")).optional(),
+})
 
 export async function SellProduct(prevState: any, formData: FormData) {
     const { getUser } = getKindeServerSession();
@@ -71,5 +77,45 @@ export async function SellProduct(prevState: any, formData: FormData) {
     };
 
     return state;
+};
 
+export async function UpdateUserSettings( prevState: any, formData: FormData ){
+    const { getUser } = getKindeServerSession();
+    const user = await getUser()
+
+    if(!user) {
+        throw new Error("Something went wrong, try again later!");
+    }
+
+    const validateFields = userSettingsSchema.safeParse({
+        firstName: formData.get("firstName"),
+        lastName: formData.get("lastName"),
+    })
+
+    if(!validateFields.success){
+        const state: State = {
+            status: "error",
+            errors: validateFields.error.flatten().fieldErrors,
+            message: "Oops, error!"
+        };
+
+        return state;
+    }
+
+    const data = await prisma.user.update({
+        where: {
+            id: user.id
+        },
+        data: {
+            firstName: validateFields.data.firstName,
+            lastName: validateFields.data.lastName
+        }
+    })
+
+    const state: State = { 
+        status: "success",
+        message: "Account updated successfully!",
+    };
+
+    return state;
 }
