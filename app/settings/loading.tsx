@@ -6,9 +6,8 @@ export default function LoadingFile(){
         <div className="max-w-7xl mx-auto px-4 md:px-8">
             <Card>
                 <CardHeader className="h-[500px]">
-                    <Skeleton className="h-full w-full">
-                        
-                    </Skeleton>
+                    <Skeleton className="h-full w-full" />                 
+                    
                 </CardHeader>
             </Card>            
         </div>

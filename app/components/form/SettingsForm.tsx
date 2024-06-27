@@ -1,13 +1,13 @@
 "use client";
 
+import { type State, UpdateUserSettings } from "@/app/actions";
 import { CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { SubmitButton } from "./SubmitButton";
-import { useFormState } from "react-dom";
-import { State, UpdateUserSettings } from "../actions";
 import { useEffect } from "react";
+import { useFormState } from "react-dom";
 import { toast } from "sonner";
+import { SubmitButton } from "../SubmitButton";
 
 interface iAppProps {
     firstName: string,
