@@ -118,6 +118,7 @@ export async function ProductRow({category}: iAppProps) {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 sm:grid-cols-2 mt-4 gap-10">
+                {/* Product Cards */}
                 {data.data.map((product) => (
                     <ProductCard 
                         images={product.images} 
@@ -131,4 +132,5 @@ export async function ProductRow({category}: iAppProps) {
             </div>
         </section>
     )
-}
+};
+
