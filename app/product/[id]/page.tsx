@@ -1,4 +1,6 @@
+import { BuyProducts } from "@/app/actions";
 import { ProductDescription } from "@/app/components/ProductDescription";
+import { BuyButton } from "@/app/components/SubmitButton";
 import prisma from "@/app/lib/db";
 import { Button } from "@/components/ui/button";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
@@ -13,6 +15,7 @@ async function getData(id: string){
         },
         select: {
             category: true,
+            id: true,
             description: true,
             smallDescription: true,
             name: true,
@@ -62,9 +65,10 @@ export default async  function ProductPage({ params, } : { params:{ id: string }
                 </h1>
 
                 <p className="mt-2 text-muted-foreground">{data?.smallDescription}</p>
-                <Button className="w-full mt-10" size="lg">
-                    Buy for shs.{data?.price}
-                </Button>
+                    <form action={BuyProducts}>
+                        <input type="hidden" name="id" value={data?.id} />
+                        <BuyButton price={data?.price as number}/>
+                    </form>
 
                 <div className="border-t border-gray-400 mt-10 pt-10">
                     <div className="grid grid-cols-2 w-full gap-y-3">
