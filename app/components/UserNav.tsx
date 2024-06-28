@@ -55,8 +55,10 @@ export function UserNav({ email, name, userImage } : iAppProps) {
                             My Products
                         </Link>
                     </DropdownMenuItem>
-                    <DropdownMenuItem className="cursor-pointer">
-                        Item 4
+                    <DropdownMenuItem className="cursor-pointer" asChild>
+                        <Link href="/billing">
+                            Billing
+                        </Link>
                     </DropdownMenuItem >
                 </DropdownMenuGroup>
 
