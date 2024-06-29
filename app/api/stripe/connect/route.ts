@@ -42,6 +42,5 @@ export async function POST(req: Request){
 
         return new Response("Processed!", { status: 200 });
     }
-
     
 };

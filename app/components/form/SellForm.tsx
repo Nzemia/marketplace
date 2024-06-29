@@ -5,7 +5,6 @@ import { CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from 
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { type JSONContent } from "@tiptap/react";
-import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useFormState } from "react-dom";
 import { toast } from "sonner";
@@ -25,8 +24,7 @@ export function SellForm(){
     //used shadcn ; sonner toast    
     useEffect(() => {
         if(state.status === "success"){
-            toast.success(state.message);
-            redirect("/");
+            toast.success(state.message);            
         } else if(state.status === "error"){
             toast.error(state.message)
         }
