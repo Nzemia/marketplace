@@ -3,7 +3,11 @@ import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import prisma from "../lib/db";
 import { SettingsForm } from "../components/form/SettingsForm";
 
+//for deploying to avoid the errors
+import { unstable_noStore as noStore } from "next/cache";
+
 async function getData(UserId: string) {
+    noStore();
     const data = await prisma.user.findUnique({
         where: {
             id: UserId,

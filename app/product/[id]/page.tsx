@@ -2,10 +2,12 @@ import { BuyProducts } from "@/app/actions";
 import { ProductDescription } from "@/app/components/ProductDescription";
 import { BuyButton } from "@/app/components/SubmitButton";
 import prisma from "@/app/lib/db";
-import { Button } from "@/components/ui/button";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { JSONContent } from "@tiptap/react";
 import Image from "next/image";
+
+//for deploying to avoid the errors
+import { unstable_noStore as noStore } from "next/cache";
 
 
 async function getData(id: string){
@@ -35,6 +37,8 @@ async function getData(id: string){
 
 
 export default async  function ProductPage({ params, } : { params:{ id: string }}) {
+    noStore();
+    
     const data = await getData(params.id);
     return(
         <section className="max-w-7xl mx-auto px-4 lg:px-8 lg:grid lg:grid-rows-1 lg:grid-cols-7 lg:gap-x-8 lg:gap-y-10 xl:gap-y-16">
