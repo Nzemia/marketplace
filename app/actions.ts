@@ -60,7 +60,7 @@ export async function SellProduct(prevState: any, formData: FormData) {
         return state;
     }
 
-    const data = await prisma.product.create({
+    await prisma.product.create({
         data: {
             name: validateFields.data.name,
             category: validateFields.data.category as CategoryTypes,
@@ -73,7 +73,12 @@ export async function SellProduct(prevState: any, formData: FormData) {
         }
     })
 
-    return redirect(`/products/${data.id}`)
+    const state: State = { 
+        status: "success",
+        message: "Your product has been created successfully!",
+    };
+
+    return state;
 };
 
 export async function UpdateUserSettings( prevState: any, formData: FormData ){
