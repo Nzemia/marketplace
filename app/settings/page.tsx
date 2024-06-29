@@ -6,8 +6,7 @@ import { SettingsForm } from "../components/form/SettingsForm";
 //for deploying to avoid the errors
 import { unstable_noStore as noStore } from "next/cache";
 
-async function getData(UserId: string) {
-    noStore();
+async function getData(UserId: string) {    
     const data = await prisma.user.findUnique({
         where: {
             id: UserId,
@@ -23,6 +22,7 @@ async function getData(UserId: string) {
 }
 
 export default async function SettingsPage(){
+    noStore();
     const { getUser } = getKindeServerSession();
     const user = await getUser();
 
