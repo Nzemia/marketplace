@@ -1,3 +1,4 @@
+import ProductEmail from "@/components/ProductEmail";
 import { stripe } from "@/lib/stripe";
 import { headers } from "next/headers";
 import { Resend } from 'resend';
@@ -26,7 +27,14 @@ export async function POST(req: Request){
 
             const link = session.metadata?.link;
 
-            console.log(link);
+            const { data, error } = await resend.emails.send({
+                from: "FrankUI <onboarding@resend.dev>",
+                to: ["mualukofrank@gmail.com"],
+                subject: "Your Product from FrankUI",
+                react: ProductEmail({
+                    link: link as string,
+                })
+            })
 
             break;
         }
