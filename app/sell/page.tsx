@@ -8,8 +8,7 @@ import { redirect } from "next/navigation";
 import { unstable_noStore as noStore } from "next/cache";
 
 
-async function getData(userId: string){
-    noStore();
+async function getData(userId: string){    
     const data = await prisma.user.findUnique({
         where: {
             id: userId,
@@ -29,6 +28,7 @@ async function getData(userId: string){
 
 
 export default async function SellRoute() {
+    noStore();
     const { getUser } = getKindeServerSession();
     const user = await getUser();
 
