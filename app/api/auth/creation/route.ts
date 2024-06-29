@@ -3,7 +3,11 @@ import { stripe } from "@/lib/stripe";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { NextResponse } from "next/server";
 
+//for deploying to avoid the errors
+import { unstable_noStore as noStore } from "next/cache";
+
 export async function GET () {
+    noStore();
     const { getUser } = getKindeServerSession();
     const user = await getUser();
 
